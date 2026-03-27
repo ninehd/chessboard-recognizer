@@ -12,7 +12,7 @@ from tensorflow.keras import models
 import numpy as np
 
 from constants import (
-    TILES_DIR, NN_MODEL_PATH, FEN_CHARS, USE_GRAYSCALE, DETECT_CORNERS
+    TILES_DIR, NN_MODEL_PATH, FEN_CHARS, USE_GRAYSCALE, DETECT_CORNERS, IMG_SIZE
 )
 from utils import compressed_fen
 from train import image_data
@@ -33,7 +33,7 @@ def _chessboard_tiles_img_data(chessboard_img_path, options={}):
         tiles[i].save(buf, format='PNG')
         img_data = tf.image.decode_image(buf.getvalue(), channels=n_channels)
         img_data = tf.image.convert_image_dtype(img_data, tf.float32)
-        img_data = tf.image.resize(img_data, [32, 32])
+        img_data = tf.image.resize(img_data, [IMG_SIZE, IMG_SIZE])
         img_data_list.append(img_data)
     return img_data_list
 

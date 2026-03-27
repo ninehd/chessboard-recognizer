@@ -12,7 +12,10 @@ DETECT_CORNERS = False
 TILES_DIR = './images/tiles'
 
 # Use grayscale tile PNGs
-USE_GRAYSCALE = True
+USE_GRAYSCALE = False
+
+# Image size for the neural network (MobileNetV2 needs at least 96x96)
+IMG_SIZE = 96
 
 # Where neural network model/weights are stored
-NN_MODEL_PATH = './nn/model.tf'
+NN_MODEL_PATH = './nn/model.keras'

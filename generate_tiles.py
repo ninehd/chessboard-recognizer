@@ -20,7 +20,13 @@ def _img_filename_prefix(chessboard_img_path):
     """ part of the image filename that shows which piece is on which square:
         RRqpBnNr-QKPkrQPK-PpbQnNB1-nRRBpNpk-Nqprrpqp-kKKbNBPP-kQnrpkrn-BKRqbbBp
     """
-    return chessboard_img_path.split("/")[4][:-4]
+    import re
+    name = chessboard_img_path.split("/")[-1][:-4]  # remove .png
+    # Extract the FEN part: 8 groups of 1-8 chars separated by 7 dashes
+    match = re.search(r'([1RNBQKPrnbqkp]{1,8}(?:-[1RNBQKPrnbqkp]{1,8}){7})$', name)
+    if match:
+        return match.group(1)
+    return name
 
 def _img_sub_dir(chessboard_img_path):
     """ The sub-directory where the chessboard tile images will be saved
